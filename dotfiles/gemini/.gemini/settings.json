@@ -1,0 +1,13 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "showUserIdentity": false
+  },
+  "tools": {
+    "sandbox": "podman"
+  }
+}
