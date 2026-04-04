@@ -6,6 +6,8 @@
 source ~/.local/share/omarchy/default/bash/rc
 
 # Add your own exports, aliases, and functions here.
-#
-# Make an alias for invoking commands you use constantly
-# alias p='python'
+
+# WinApps
+# From https://github.com/winapps-org/winapps/blob/main/docs/libvirt.md
+# We need this for libvirt to be able to talk to our VM
+export LIBVIRT_DEFAULT_URI="qemu:///system"
