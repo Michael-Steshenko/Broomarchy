@@ -43,3 +43,9 @@ To add a new configuration (e.g., `git`):
 
 ## Hyperland config files 
 You can find a list of user-configurable hyperland files in ```.config/hypr/hyperland.conf```, it might be a good idea to start tracking those as they change.
+
+## Virtual machines
+
+*Note*: Do not use the built-in Omarchy Windows installer (Super + Alt + Space -> Install -> Windows). It defaults to Windows 11 Pro without an easy way to use a custom ISO (like IOT Enterprise LTSC), and has no 3D GPU acceleration out of the box.
+
+Instead, use QEMU/KVM + Virt-Manager + libvirt (paired with WinApps). This provides a proper GUI to easily load custom ISOs, configure advanced hardware, and achieve seamless desktop integration.
