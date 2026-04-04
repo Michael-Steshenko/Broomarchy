@@ -48,4 +48,44 @@ You can find a list of user-configurable hyperland files in ```.config/hypr/hype
 
 *Note*: Do not use the built-in Omarchy Windows installer (Super + Alt + Space -> Install -> Windows). It defaults to Windows 11 Pro without an easy way to use a custom ISO (like IOT Enterprise LTSC), and has no 3D GPU acceleration out of the box.
 
-Instead, use QEMU/KVM + Virt-Manager + libvirt (paired with WinApps). This provides a proper GUI to easily load custom ISOs, configure advanced hardware, and achieve seamless desktop integration.
+### Setup
+we use a Windows 11 KVM/QEMU virtual machine managed via `virt-manager`. 
+
+**1. Hardware & Drivers**
+For network access and seamless display scaling, the VM requires VirtIO drivers:
+* In Virt-Manager, ensure the **NIC** (Network Interface) device model is explicitly set to `virtio`.
+* Attach the `virtio-win.iso` as a secondary CD-ROM.
+* Boot Windows and run `virtio-win-guest-tools.exe` from the CD drive to install all necessary host agents and network drivers.
+
+### Possible issues
+
+#### Fixing Internet Access (Docker Conflict)
+
+If you are running Docker on your host machine, you may encounter a networking conflict. Docker's legacy firewall rules will actively block the virtual machine's bridge (`virbr0`), resulting in local network access but no internet.
+
+To fix this on an Arch-based system, you need to ensure the modern firewall translation layer is installed, and then create a libvirt hook to bypass Docker's drop policy.
+
+1. Install the modern translation layer (if prompted to replace `iptables`, confirm with `y`):
+   ```bash
+   sudo pacman -S iptables-nft
+   ```
+2. Create the hook directory: 
+   ```bash
+   sudo mkdir -p /etc/libvirt/hooks
+   ```
+3. Create the script file: 
+   ```bash
+   sudo nvim /etc/libvirt/hooks/network
+   ```
+4. Add the following script to explicitly whitelist the bridge traffic using the legacy backend:
+   ```bash
+   #!/bin/bash
+   if [ "$2" == "started" ] || [ "$2" == "restarted" ]; then
+       iptables-legacy -I FORWARD -i virbr0 -j ACCEPT
+       iptables-legacy -I FORWARD -o virbr0 -j ACCEPT
+   fi
+   ```
+5. Save the file and make it executable: 
+   ```bash
+   sudo chmod +x /etc/libvirt/hooks/network
+   ```
