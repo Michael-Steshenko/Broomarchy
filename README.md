@@ -44,17 +44,16 @@ To add a new configuration (e.g., `git`):
 ## Hyperland config files 
 You can find a list of user-configurable hyperland files in ```.config/hypr/hyperland.conf```, it might be a good idea to start tracking those as they change.
 
-## Virtual machines
+## Windows VM
 
 *Note*: Do not use the built-in Omarchy Windows installer (Super + Alt + Space -> Install -> Windows) unless you just need to quickly spin up a temporary Windows VM. It defaults to Windows 11 Pro without an easy way to use a custom ISO (like IOT Enterprise LTSC), and has no 3D GPU acceleration out of the box.
 
 ### Setup
 we use a Windows 11 KVM/QEMU virtual machine managed via `virt-manager`. 
 
-**1. Hardware & DriverYou can find a list of user-configurable hyperland files in ```.config/hypr/hyperland.conf```, it might be aYou can find a list of user-configurable hyperland files in ```.config/hypr/hyperland.conf```, it might be a good idea to start tracking those as they change.
- good idea to start tracking those as they change.
-s**
-For network access and seamless display scaling, the VM requires VirtIO drivers:
+A good tutorial for setting up a Windows virtual machine including some settings that can improve performance can be found [here](https://github.com/winapps-org/winapps/blob/main/docs/libvirt.md)
+
+The link above should include all necessry steps, but if you wish to set it up yourself, make sure you do the following for network access and seamless display scaling, the VM requires VirtIO drivers:
 * In Virt-Manager, ensure the **NIC** (Network Interface) device model is explicitly set to `virtio`.
 * Attach the `virtio-win.iso` as a secondary CD-ROM.
 * Boot Windows and run `virtio-win-guest-tools.exe` from the CD drive to install all necessary host agents and network drivers.
