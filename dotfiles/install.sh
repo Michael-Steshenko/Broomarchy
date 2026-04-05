@@ -9,6 +9,13 @@ fi
 # Move to the script's directory so paths are relative
 cd "$(dirname "$0")" || exit
 
+# Handle secrets template
+if [ ! -f secrets/.secrets ]; then
+    echo "Creating .secrets from template..."
+    cp secrets/.secrets.template secrets/.secrets
+    echo "Please edit dotfiles/secrets/.secrets with your actual passwords!"
+fi
+
 echo "Stowing all configuration directories to $HOME..."
 
 # Stow all subdirectories (indicated by the trailing slash)
