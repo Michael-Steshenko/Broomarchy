@@ -1,0 +1,6 @@
+#!/bin/bash
+# Libvirt network hook to allow traffic through Docker's firewall
+if [ "$2" == "started" ] || [ "$2" == "restarted" ]; then
+    iptables-legacy -I FORWARD -i virbr0 -j ACCEPT
+    iptables-legacy -I FORWARD -o virbr0 -j ACCEPT
+fi

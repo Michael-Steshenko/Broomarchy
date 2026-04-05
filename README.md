@@ -4,7 +4,9 @@ This repository uses [GNU Stow](https://www.gnu.org/software/stow/) to manage do
 
 ## Directory Structure
 
-Configurations are organized in subdirectories within the `dotfiles` folder
+Configurations are organized in subdirectories within the `dotfiles` folder:
+- dotfiles/user for configurations in `~` folder
+- dotfiles/system for system configurations outside of `~` folder
 
 ## Prerequisites
 
@@ -61,6 +63,8 @@ The link above should include all necessry steps, but if you wish to set it up y
 ### Possible issues
 
 #### Fixing Internet Access (Docker Conflict)
+
+**Note**: the `dotfiles/system/install.sh` script will automatically symlink the file needed for this fix. and so will `dotfiles/install.sh`, so you may want to skip some of the steps described below.
 
 If you are running Docker on your host machine, you may encounter a networking conflict. Docker's legacy firewall rules will actively block the virtual machine's bridge (`virbr0`), resulting in local network access but no internet.
 
