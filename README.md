@@ -60,7 +60,7 @@ The link above should include all necessry steps, but if you wish to set it up y
 * Attach the `virtio-win.iso` as a secondary CD-ROM.
 * Boot Windows and run `virtio-win-guest-tools.exe` from the CD drive to install all necessary host agents and network drivers.
 
-# Adding more  WinApps applications
+### Adding more WinApps applications
 Simply uninstall then reinstall WinApps with the installer:
 `bash <(curl https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh)`
 
