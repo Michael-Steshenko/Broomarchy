@@ -10,11 +10,13 @@ Configurations are organized in subdirectories within the `dotfiles` folder:
 
 ## Prerequisites
 
-- **GNU Stow**: Must be installed on your system.
-- Please use the **built-in Omarchy installer** to install `stow`:
+- **GNU Stow** is used by the installer scripts to symlink and manage dotfiles.
+- **keyd**: is used for a low level key remapping, including caps lock to hyper-key.
+- Use the **built-in Omarchy installer** to install `stow`:
 ```bash
-omarchy-pkg-add stow
+omarchy-pkg-add stow keyd
 ```
+
 
 ## How to Install
 
