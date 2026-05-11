@@ -9,4 +9,4 @@ sh user/install.sh
 sh system/install.sh
 
 echo ""
-echo "All configurations stowed!"
+echo "Finish"
